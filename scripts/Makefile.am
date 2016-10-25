@@ -247,7 +247,9 @@ install-exec-hook:
 		cd $(DESTDIR)$(bindir) && \
 		$(RM) $$wrapper; \
 	done
-	$(INSTALL) .lib/makepkg $(DESTDIR)$(bindir)/makepkg
+	for wrapper in $(WRAPPER); do \
+		$(INSTALL) .lib/$${wrapper%-wrapper} $(DESTDIR)$(bindir)/$${wrapper%-wrapper}; \
+	done
 	for dir in $(LIBMAKEPKGDIRS); do \
 		$(MKDIR_P) $(DESTDIR)$(libmakepkgdir)/$$dir; \
 	done
